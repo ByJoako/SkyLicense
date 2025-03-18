@@ -1,0 +1,373 @@
+/* General */
+.dashboard {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+}
+
+.section {
+    background: linear-gradient(135deg, #151515, #1a1a1a);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out;
+}
+
+.section h2 {
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.section-quick {
+    display: flex;
+    overflow: hidden;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.section-head {
+    display: flex;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #4ea8de;
+    padding-bottom: 5px;
+    overflow: hidden;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-container {
+    height: 550px;
+}
+
+/* Tablas */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    overflow: hidden;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.table select {
+    width: 100%;
+    padding: 6px;
+    border-radius: 5px;
+    background-color: #252525;
+    color: white;
+    border: 1px solid #4ea8de;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #2a2a3a;
+}
+
+.table th {
+    background-color: #4ea8de;
+    color: #ffffff;
+}
+
+.table tbody tr {
+    height: 61px;
+    background-color: #252525;
+    transition: background 0.2s;
+}
+
+.table tbody tr:hover {
+    background-color: #3a3d55;
+}
+
+/* Reducir el ancho de la columna del avatar */
+.avatar-column {
+    width: 60px;
+    text-align: center;
+}
+
+.avatar-cell {
+    text-align: center;
+}
+
+/* Avatar */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #4ea8de;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+/* Botones */
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.button {
+    padding: 10px 18px;
+    background-color: #4ea8de;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    transition: background 0.2s ease-in-out;
+}
+
+.button:hover {
+    background-color: #3987b5;
+}
+
+.button-unban {
+    width: 100px;
+    background-color: #28a745 !important;
+}
+
+.button-ban {
+    width: 100px;
+    background-color: #dc3545 !important;
+}
+
+.button-remove {
+    background-color: #ff0000 !important;
+    margin-left: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.button-remove:hover {
+    background-color: #555b65;
+}
+
+/* Blacklist */
+.blacklist-management {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 10px;
+    background-color: #252525;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.input-group input:focus {
+    background-color: #3a3d55;
+    border: 1px solid #4ea8de;
+}
+
+/* Lista Negra */
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    font-size: 0.9rem;
+}
+
+ul li:hover {
+    background-color: #3a3d55;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Filtros */
+.filters input, .filters select {
+    width: 190px;
+    padding: 10px;
+    background-color: #252525;
+    border: 1px solid #4ea8de;
+    border-radius: 6px;
+    color: white;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Ajustar el ancho de la columna del avatar */
+.avatar-column {
+    width: 60px;
+    text-align: center;
+}
+
+.avatar-cell {
+    text-align: center;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Mensaje de "No resultados" */
+.no-results {
+    text-align: center;
+    color: #ccc;
+    padding: 10px;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    background-color: #4ea8de;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Private Key Input */
+.private-key {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.private-key-input {
+    width: 100%;
+    max-width: 100%;
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    font-family: monospace;
+}
+
+.private-key-input:focus {
+    outline: none;
+    border-color: #007bff;
+    background-color: #fff;
+}
+
+.copy-button {
+    margin: 0;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background 0.2s;
+}
+
+.copy-button:hover {
+    background: #0056b3;
+}
+
+.copy-button i {
+    font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard {
+        padding: 15px;
+    }
+
+    .section {
+        padding: 15px;
+    }
+
+    .section h2 {
+        font-size: 1.1rem;
+    }
+
+    .table th, .table td {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+    }
+
+    .blacklist-management {
+        grid-template-columns: 1fr;
+    }
+
+    .input-group {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .input-group input {
+        width: 100%;
+    }
+
+    .private-key {
+        flex-direction: column;
+    }
+
+    .private-key-input {
+        max-width: 100%;
+    }
+
+    .copy-button {
+        width: 100%;
+    }
+}

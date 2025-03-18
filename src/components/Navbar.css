@@ -1,0 +1,169 @@
+/* Estilos generales del navbar */
+i {
+  margin: 5px;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #151515, #1a1a1a);
+  padding: 10px 20px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  position: relative;
+  border-bottom: 1px solid rgb(85,85,85); /* Borde inferior */
+}
+
+.navbar-logo {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.navbar-logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.navbar-logo h1 {
+  font-size: 24px;
+  color: #0499ff;
+}
+
+/* Links de navegación */
+.navbar-links {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-links a {
+  color: #cccccc;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 16px;
+}
+
+.navbar-links a:hover {
+  color: cyan;
+}
+
+/* Área de autenticación */
+.navbar-auth {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar-auth a {
+  text-decoration: none;
+  background: #0499ff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Botón de menú (hamburguesa) */
+.navbar-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Contenedor principal del dropdown */
+.navbar-dropdown {
+  position: absolute;
+  top: 75%; /* Coloca el dropdown justo debajo del elemento padre */
+  right: 10px; /* Alinea el dropdown a la derecha */
+  border-radius: 4px; /* Bordes redondeados */
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  min-width: 100px; /* Ancho mínimo */
+  background: #333;
+  align-content: center;
+}
+
+/* Estilo para los enlaces dentro del dropdown */
+.navbar-dropdown a {
+  display: block; /* Hace que los enlaces ocupen toda la línea */
+  padding: 8px 12px; /* Espaciado interno */
+  color: #fff; /* Color de texto */
+  text-decoration: none; /* Quita el subrayado */
+  font-size: 14px; /* Tamaño de fuente */
+  transition: background-color 0.2s ease; /* Transición suave */
+  text-align: center; /* Alineación del texto a la izquierda */
+  border-radius: 4px;
+  background: #333;
+}
+
+/* Estilo para los enlaces al pasar el ratón */
+.navbar-dropdown a:hover {
+  background-color: #0499ff; /* Fondo gris claro */
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+/* Estilo para el botón de logout */
+.navbar-dropdown button {
+  margin: auto;
+  width: 100%;
+  
+  display: block; /* Hace que el botón ocupe toda la línea */
+  padding: 8px 12px; /* Espaciado interno */
+  border: none; /* Sin borde */
+  color: #fff; /* Color de texto */
+  font-size: 14px; /* Tamaño de fuente */
+  text-align: center; /* Alineación del texto a la izquierda */
+  cursor: pointer; /* Cambia el cursor al pasar el ratón */
+  transition: background-color 0.2s ease; /* Transición suave */
+  background: #333;
+}
+
+/* Estilo para el botón de logout al pasar el ratón */
+.navbar-dropdown button:hover {
+  background: #d33333;
+  border-radius: 4px; /* Bordes redondeados */
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background-color: #000;
+    padding: 10px 0;
+    display: none;
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-links a {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .navbar-toggle {
+    display: block;
+  }
+}

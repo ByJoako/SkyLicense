@@ -1,0 +1,149 @@
+
+
+button {
+  margin: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
+
+/* 🎨 Estilos para los modales */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #333;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+  color: white;
+}
+
+.close-button {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content form label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: #e0e0e0;
+}
+
+.modal-content input,
+textarea,
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+  transition: border-color 0.3s ease;
+}
+
+.modal-content button {
+  margin: 0;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+button[type="submit"] {
+  margin-top: 15px;
+}
+
+.upload-button {
+  margin-top: 10px;
+}
+
+.confirm-button {
+  background-color: #dc3545;
+}
+
+.confirm-button:hover {
+  background-color: #c82333;
+}
+
+.cancel-button {
+  background-color: #6c757d;
+}
+
+.cancel-button:hover {
+  background-color: #5a6268;
+}
+
+.version-item:hover {
+    background-color: #3a3a3a;
+}
+.modal-content ul {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+}
+.version-item {
+  margin: 0;
+  background-color: #2c2c2c;
+    padding: 5px 5px;
+    
+  justify-content: space-between;
+  align-items: center;
+  
+  transition: background-color 0.3s ease;
+}
+
+.version-item button {
+  padding: 5px;
+  background: #dc3545;
+}
+.version-input {
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center; /* Alinea verticalmente los elementos */
+    gap: 10px; /* Espacio entre los elementos */
+}
+
+.version-input input[type="text"] {
+    width: 30%;
+}
+
+.version-input .upload-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.version-input .upload-button:hover {
+    background-color: #0056b3;
+}
+
+.version-input button:not(.upload-button) {
+    background-color: #28a745;
+    color: white;
+}
+
+.version-input button:not(.upload-button):hover {
+    background-color: #1e7e34;
+}
+.delete-content {
+  display: flex;
+  gap: 10px;
+}

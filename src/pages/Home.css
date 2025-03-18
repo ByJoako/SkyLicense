@@ -1,0 +1,104 @@
+/* Totales (Cards) */
+.dashboard-totals {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 40px 0;
+}
+
+.card {
+  background: linear-gradient(135deg, #151515, #1a1a1a);
+  border-radius: 10px;
+  padding: 15px 20px;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 180px;
+  display: flex; /* Alineación en fila */
+  align-items: center; /* Centra verticalmente */
+  gap: 15px; /* Espaciado entre ícono y texto */
+  flex: 1 1 calc(33.3% - 20px);
+}
+
+.card-icon {
+  font-size: 36px;
+  color: #0499ff;
+}
+
+.card-details h2 {
+  font-size: 18px;
+  color: #FFF;
+  margin: 0;
+}
+
+.card-details p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ccc;
+  margin: 0;
+}
+
+
+/* Responsividad */
+/* Contenedor general */
+.chart-container {
+  margin: 20px auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #151515, #1a1a1a);
+  border-radius: 16px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+  max-width: 800px;
+  width: 90%;
+  transition: transform 0.3s, box-shadow 0.3s;
+  color: #eee;
+}
+
+/* Título del gráfico */
+.chart-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Contenedor de los gráficos */
+.chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  overflow: hidden;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+/* Personalización de tooltips */
+.recharts-tooltip-wrapper {
+  background-color: rgba(42, 42, 42, 0.9);
+  border-radius: 10px;
+  color: #eee;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .dashboard-totals {
+    gap: 10px;
+    align-items: center;
+  }
+
+  .card {
+    max-width: 180px;
+  }
+
+  .chart-container {
+    font-size: 1.0rem;
+    padding: 10px;
+  }
+
+  .chart {
+    height: 300px; /* Ajuste para pantallas pequeñas */
+  }
+}

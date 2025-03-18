@@ -1,0 +1,72 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.3s ease;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Altura mínima para ocupar toda la pantalla */
+}
+
+.content {
+  flex: 1; /* Hace que el contenido crezca y empuje el footer hacia abajo */
+}
+footer {
+    text-align: center;
+    font-size: 1rem;
+    margin: 10px;
+    color: #aaaaaa;
+}
+
+/* Estilos generales para botones */
+button {
+  background-color: #007bff; /* Color de fondo principal */
+  color: white; /* Color del texto */
+  border: none; /* Sin bordes */
+  padding: 10px 15px; /* Espaciado interno */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor de mano cuando está sobre el botón */
+  font-size: 16px; /* Tamaño de fuente */
+  transition: background-color 0.3s ease-in-out; /* Transición al pasar el mouse */
+}
+
+/* Hover effect para botones */
+button:hover {
+  background-color: #0056b3; /* Cambiar el color de fondo al pasar el mouse */
+}
+
+ul {
+  list-style-type: none;
+}
+
+.floating-message {
+  top: 25px;
+  right: 25px;
+  position: absolute;
+  border-radius: 8px;
+  box-shadow: 0 4px 8pc rgba(0, 0, 0, 0.2);
+  color: #000;
+  padding: 16px;
+  font-weight: bold;
+  
+  border: 2px solid #fff;
+    text-align: center;
+    background-color: #333;
+    
+    animation: slideDown 0.5s ease-in-out;
+}
+ .error {
+  background: linear-gradient(to right, #CE0A18, #FE8800);
+}
+
+.floating-message .success {
+  background: linear-gradient(to right, #00dde0, #00ff00);
+}

@@ -1,0 +1,85 @@
+.license-header {
+  display: flex;
+  justify-content: space-between;
+}
+/* Licenseslist.css */
+.licenses-list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+/* Estilos generales de las licencias */
+.license-item {
+  border-left: 4px solid transparent; /* Color del borde de acuerdo con el estado */
+  margin-bottom: 20px;
+  padding: 15px;
+  background: linear-gradient(135deg, #151515, #1a1a1a);;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 300px;
+}
+
+.license-details h3 {
+  font-size: 1.1rem;
+}
+.license-details p {
+  font-size: 0.7rem;
+}
+.license-item.active {
+  border-left-color: #4caf50; /* Color para activo */
+}
+
+.license-item.expired {
+  border-left-color: #fc4f;
+}
+.license-item.disabled {
+  border-left-color: #f44336; /* Color para deshabilitado */
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  position: absolute;
+  background-color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 7px 8px rgba(0, 0, 0, 0.1);
+  padding: 0;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px;
+  color: #777;
+  text-decoration: none;
+  margin: 0;
+}
+
+
+.dropdown-menu a:hover {
+  background-color: #f4f4f4;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .license-item {
+    flex-direction: column;
+  }
+
+  .license-actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+  }
+}
