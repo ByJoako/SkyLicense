@@ -12,6 +12,7 @@ const { getLicenses,
   clearHWID,
   resetKey, } = require('../controllers/licensesController');
 const { getProducts, download } = require('../controllers/productsController');
+const productController = require('../controllers/adminProductController');
 
 router.get('/auth/discord', passport.authenticate('discord'));
 
@@ -43,4 +44,8 @@ router.post('/license', apiController.restAPI);
 router.get('/private-key', authenticateToken, (req, res) => {
   res.json(process.env.CODE_PRIVATE)
 });
+
+router.get('/admin(products', authenticateToken, productController.getProducts);
+router.post('/admin/products/create', authenticateToken, productController.create);
+router.post('/admin/products/delete', authenticateToken, productController.remove);
 module.exports = router;

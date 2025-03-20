@@ -1,33 +1,26 @@
 import React from "react";
 import axios from 'axios';
+import { toast } from 'toasty';
 
 const DeleteProductModal = ({ product, onClose }) => {
   const token = localStorage.getItem("token");
   
   const handleDelete = async () => {
-    try {
-        const response = await axios.post('/api/admin/products/delete', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (response.ok) {
-          onClose({
-            product,
-            text: response.data,
-            type: 'success'
-          })
-        } else {
-          onClose({
-            text: response.data,
-            type: 'error'
-          })
-        }
-      } catch (error) {
-        console.error('Error fetching:', error);
-        onClose({
-            text:'Error',
-            type: 'error'
-          })
+    fetch('/api/admin/products/delete', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` },
+      data: { productId: product._id },
+    }).then(res => {
+      if (!res.ok) {
+        throw new Error('Failed to delete product');
       }
+      toast.success('Product deleted successfully');
+      onClose(true);
+    }).catch(err => {
+      console.error('Error deleting:', err);
+      toast.error('Error deleting product');
+      onClose(false);
+    })
   };
 
   return (

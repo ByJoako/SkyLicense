@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
+import { toast } from 'toasty';
 
 const CreateProductModal = ({ onClose }) => {
   const [roles, setRoles] = useState([]);
@@ -11,11 +12,6 @@ const CreateProductModal = ({ onClose }) => {
 
   const imageInputRef = useRef(null);
   const fileInputRef = useRef(null);
-
-  useEffect(() => {
-    
-  }, []);
-  
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,10 +21,30 @@ const CreateProductModal = ({ onClose }) => {
       return;
     }
 
-    console.log({ name, description, image, file, version, role });
-    onClose({
-      name, description, image, file, version, role 
-    });
+    const token = localStorage.getItem('token');
+    fetch('/api/admin/products/create', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+      body: new FormData(e.target),
+    }).then(res => {
+      if (!res.ok) {
+        throw new Error("Failed to create product.");
+      }
+      toast.success("Product created successfully.");
+      
+      onClose({
+        name, description, image, file, version, role 
+      });
+
+    }).catch(err => {
+      toast.error("Failed to create product");
+      console.error(err);
+
+      onClose();
+    })
   };
 
   return (

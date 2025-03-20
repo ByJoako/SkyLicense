@@ -46,3 +46,10 @@ const parseForm = (req) => {
         });
     });
 };
+
+module.exports = {
+  getProducts,
+  create,
+  edit,
+  remove
+};

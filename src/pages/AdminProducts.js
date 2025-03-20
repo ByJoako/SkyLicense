@@ -1,34 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CreateProductModal from "../components/products/createProducts";
 import EditProductModal from "../components/products/editProducts";
 import DeleteProductModal from "../components/products/deleteProducts";
+import { ToastContainer, toast } from 'toasty';
 import "./Products.css";
 
 const ProductAdmin = () => {
-  const [message, setMessage] = useState(null);
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: "Product 1",
-      description: "This is a test product",
-      image: "https://via.placeholder.com/50",
-      versions: ["1.0", "1.1"],
-      role: "Admin",
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      description: "This is a test product",
-      image: "https://via.placeholder.com/50",
-      versions: ["1.0", "1.1"],
-      role: "Admin",
-    },
-  ]);
+  const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    fetch('/api/admin/products',{
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}` },
+    }).then(res => {
+      if (!res.ok) {
+        throw new Error('Failed fetch products');
+      }
+      res.json().then(data => setProducts(data));
+    }).catch(err => {
+      console.error('Error:', err);
+      toast.error('Error fetch product');
+    })
+  })
   const openEditModal = (product) => {
     setSelectedProduct(product);
     setIsEditOpen(true);
@@ -43,7 +41,7 @@ const ProductAdmin = () => {
     <div className="products-container">
       <h1>Manage Products</h1>
       <button onClick={() => setIsCreateOpen(true)}>Create Product</button>
-      {message && <div className={`floating-message ${message.type}`}>{message.text}</div>}
+      <ToastContainer />
       <div className="products-list">
         {products.length > 0 ? (
           products.map((product) => (
@@ -64,18 +62,23 @@ const ProductAdmin = () => {
           <p>No products available.</p>
         )}
       </div>
-            {isCreateOpen && <CreateProductModal onClose={(x) =>  {
-            products.push(x)
+          {isCreateOpen && <CreateProductModal onClose={(x) =>  {
+            if (x) {
+              setProducts([...products, x])
+            }
             setIsCreateOpen(false)
             }
-            } />}
-      {isEditOpen && <EditProductModal product={selectedProduct} onClose={() => setIsEditOpen(false)} />}
+          } />}
+      {isEditOpen && <EditProductModal product={selectedProduct} onClose={(x) => {
+        products = products.map((p) => (p.name === selectedProduct.name? x : p))
+        setIsEditOpen(false)
+        }
+      } />}
       {isDeleteOpen && <DeleteProductModal product={selectedProduct} onClose={(res) => {
-      //products.remove(res.product);
-      setTimeout(function() {
-        if (message == res) setMessage(null);
-      }, 10000);
-      setMessage(res);
+   
+        if (res) {
+        setProducts(products.filter((p) => p.name !== selectedProduct.name));
+      }
       setIsDeleteOpen(false)
       }
       } />}
