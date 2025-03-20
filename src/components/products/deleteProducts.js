@@ -1,6 +1,6 @@
 import React from "react";
 import axios from 'axios';
-import { toast } from 'toasty';
+import { toast } from 'react-toastify';
 
 const DeleteProductModal = ({ product, onClose }) => {
   const token = localStorage.getItem("token");

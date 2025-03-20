@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CreateProductModal from "../components/products/createProducts";
 import EditProductModal from "../components/products/editProducts";
 import DeleteProductModal from "../components/products/deleteProducts";
-import { ToastContainer, toast } from 'toasty';
+import { ToastContainer, toast } from 'react-toastify';
 import "./Products.css";
 
 const ProductAdmin = () => {

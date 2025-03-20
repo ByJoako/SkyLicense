@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { toast } from 'toasty';
+import { toast } from 'react-toastify';
 
 const CreateProductModal = ({ onClose }) => {
   const [roles, setRoles] = useState([]);
