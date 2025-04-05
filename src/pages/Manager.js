@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Manager.css";
 import GeneralTable from "../components/manager/generalTable";
@@ -7,7 +6,7 @@ import UserTable from "../components/manager/userTable";
 import KeyTable from "../components/manager/keyTable";
 import BlacklistTable from "../components/manager/blacklistTable";
 import { useAuthContext } from '../components/Auth';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router';
 
 const ManagerDashboard = () => {
   const token = localStorage.getItem('token');

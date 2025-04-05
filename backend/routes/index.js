@@ -45,7 +45,9 @@ router.get('/private-key', authenticateToken, (req, res) => {
   res.json(process.env.CODE_PRIVATE)
 });
 
-router.get('/admin(products', authenticateToken, productController.getProducts);
-router.post('/admin/products/create', authenticateToken, productController.create);
+router.get('/admin/products', authenticateToken, productController.getProducts);
+router.post('/admin/products/create', (req,res, next) => {
+  console.log('h')
+  }, authenticateToken, productController.create);
 router.post('/admin/products/delete', authenticateToken, productController.remove);
 module.exports = router;

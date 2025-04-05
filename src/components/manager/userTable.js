@@ -75,7 +75,7 @@ async function getUsers() {
   const handleRoleChange = useCallback(async (userId, newRole) => {
     await updateRole(userId, newRole);
     setUsers(prevUsers =>
-      prevUsers.map(user => (user.id === userId ? { ...user, role: newRole } : user))
+      prevUsers.map(user => (user.id == userId ? { ...user, role: newRole } : user))
     );
   }, []);
 
@@ -83,7 +83,7 @@ async function getUsers() {
   const toggleBanUser = useCallback((userId) => {
     updateBan(userId);
     setUsers(prevUsers =>
-      prevUsers.map(user => (user._id === userId ? { ...user, isBanned: !user.isBanned } : user))
+      prevUsers.map(user => (user._id == userId ? { ...user, isBanned: !user.isBanned } : user))
     );
   }, []);
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 import { useAuthContext } from '../components/Auth';
 import './Products.css'; // Import CSS
 import './productsAdmin.css'; // Import CSS

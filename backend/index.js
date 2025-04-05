@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const path = require('path');
 
 dotenv.config();
 
@@ -17,8 +18,8 @@ app.use(
     resave: false, // No guarda la sesión si no se ha modificado
     saveUninitialized: false, // No guarda sesiones vacías
     cookie: {
-      secure: process.env.NODE_ENV === 'production', // Asegúrate de usar HTTPS en producción
-      maxAge: 24 * 60 * 60 * 1000, // 1 día
+      secure: true, // Asegúrate de usar HTTPS en producción
+      
     },
   })
 );
@@ -26,6 +27,7 @@ app.use(
 // Inicializar Passport
 app.use(passport.initialize());
 app.use(passport.session()); // Manejo de sesiones de passport
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))

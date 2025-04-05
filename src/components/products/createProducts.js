@@ -2,7 +2,8 @@ import React, { useState, useRef } from "react";
 import { toast } from 'react-toastify';
 
 const CreateProductModal = ({ onClose }) => {
-  const [roles, setRoles] = useState([]);
+  const [roles, setRoles] = useState([
+    'tets']);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
@@ -13,44 +14,59 @@ const CreateProductModal = ({ onClose }) => {
   const imageInputRef = useRef(null);
   const fileInputRef = useRef(null);
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    try {
     e.preventDefault();
-
+console.log('1')
     if (!image || !file) {
       alert("Please select an image and a file before submitting.");
       return;
     }
 
     const token = localStorage.getItem('token');
-    fetch('/api/admin/products/create', {
+    
+    const formdata = new FormData();
+    formdata.append('name', name);
+    formdata.append('description', description);
+    formdata.append('image', image);
+    formdata.append('file', file);
+    formdata.append('versionName', version);
+    formdata.append('roleId', role);
+    console.log('2')
+    const res = await fetch('/api/admin/products/create', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
       },
-      body: new FormData(e.target),
-    }).then(res => {
-      if (!res.ok) {
-        throw new Error("Failed to create product.");
-      }
-      toast.success("Product created successfully.");
+      body: formdata
+    });
+    console.log(res)
+    const data = await res.json();
+    console.log(data)
+    if (!res.ok) {
+          throw new Error(data.message);
+        } else {
+    toast.success(data.message);
+        
+        onClose({
+          name, description, image 
+        });
+        }
       
-      onClose({
-        name, description, image, file, version, role 
-      });
-
-    }).catch(err => {
-      toast.error("Failed to create product");
+    } catch(err) {
+      toast.error(err.message || err);
       console.error(err);
-
-      onClose();
-    })
+    }
+  };
+  
+  const close = () => {
+    onClose();
   };
 
   return (
     <div className="modal">
       <div className="modal-content">
-        <span className="close-button" onClick={onClose}>&times;</span>
+        <span className="close-button" onClick={close}>&times;</span>
         <h2>Create Product</h2>
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Name:</label>

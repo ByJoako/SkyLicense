@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import CreateProductModal from "../components/products/createProducts";
 import EditProductModal from "../components/products/editProducts";
 import DeleteProductModal from "../components/products/deleteProducts";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Bounce } from 'react-toastify';
 import "./Products.css";
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductAdmin = () => {
   const [products, setProducts] = useState([]);
@@ -13,6 +14,7 @@ const ProductAdmin = () => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   useEffect(() => {
+    
     const token = localStorage.getItem('token');
     fetch('/api/admin/products',{
       method: 'GET',
@@ -21,12 +23,15 @@ const ProductAdmin = () => {
       if (!res.ok) {
         throw new Error('Failed fetch products');
       }
-      res.json().then(data => setProducts(data));
+      res.json().then(data => {
+        setProducts(data)
+      });
     }).catch(err => {
-      console.error('Error:', err);
-      toast.error('Error fetch product');
-    })
-  })
+      console.error('Error:', err.message || err);
+      toast.error('Error to fetch products!');
+    });
+  }, []);
+  
   const openEditModal = (product) => {
     setSelectedProduct(product);
     setIsEditOpen(true);
@@ -39,15 +44,27 @@ const ProductAdmin = () => {
 
   return (
     <div className="products-container">
+<ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick={false}
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+transition={Bounce}
+/>
       <h1>Manage Products</h1>
       <button onClick={() => setIsCreateOpen(true)}>Create Product</button>
-      <ToastContainer />
       <div className="products-list">
         {products.length > 0 ? (
           products.map((product) => (
             <div key={product._id} className="product-item">
               <img
-                src="https://via.placeholder.com/250" // Product image placeholder
+                src={product.image} // Product image placeholder
                 alt={`${product.name} thumbnail`}
                 className="product-thumbnail"
               />
@@ -63,6 +80,7 @@ const ProductAdmin = () => {
         )}
       </div>
           {isCreateOpen && <CreateProductModal onClose={(x) =>  {
+            
             if (x) {
               setProducts([...products, x])
             }
@@ -70,16 +88,16 @@ const ProductAdmin = () => {
             }
           } />}
       {isEditOpen && <EditProductModal product={selectedProduct} onClose={(x) => {
-        products = products.map((p) => (p.name === selectedProduct.name? x : p))
+        setProducts(products.map((p) => (p.name === selectedProduct.name? x : p)));
         setIsEditOpen(false)
         }
       } />}
       {isDeleteOpen && <DeleteProductModal product={selectedProduct} onClose={(res) => {
-   
+   console.log(res)
         if (res) {
         setProducts(products.filter((p) => p.name !== selectedProduct.name));
-      }
-      setIsDeleteOpen(false)
+        }
+        setIsDeleteOpen(false)
       }
       } />}
     </div>

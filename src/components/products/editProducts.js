@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { toast } from 'react-toastify';
 
 const EditProductModal = ({ product, onClose }) => {
   const [description, setDescription] = useState(product.description);
@@ -9,36 +10,73 @@ const EditProductModal = ({ product, onClose }) => {
   const [file, setFile] = useState(null);
   const imageInputRef = useRef(null);
   const fileInputRef = useRef(null);
-  
-  const handleAddVersion = () => {
-    if (newVersion.trim()) {
-      setVersions([...versions, newVersion.trim()]);
-      setNewVersion("");
+
+  const token = localStorage.getItem('token');
+
+  const handleRequest = async (url, formData) => {
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData
+      });
+      const data = await res.json();
+      console.log(data)
+      if (!res.ok) throw new Error(data.message);
+      toast.success(data.message);
+      return data;
+    } catch (err) {
+      console.error('Error:', err);
+      toast.error(err.message || err);
     }
   };
 
-  const handleRemoveVersion = (index) => {
-    setVersions(versions.filter((_, i) => i !== index));
+  const handleAddVersion = async () => {
+    if (!newVersion.trim() || !file) {
+      return toast.error('Version name or file is missing');
+    }
+
+    const formData = new FormData();
+    formData.append('productId', product._id);
+    formData.append('versionName', newVersion);
+    formData.append('versionFile', file);
+
+    await handleRequest('/api/admin/products/edit', formData);
+    
+    setVersions(prev => [...prev, { value: newVersion, timestamp: Date.now() }]);
+    setNewVersion("");
+    setFile(null);
   };
 
-  const handleSubmit = (e) => {
+  const handleRemoveVersion = async (index) => {
+    const formData = new FormData();
+    formData.append('productId', product._id);
+    formData.append('versionName', versions[index].value);
+
+    await handleRequest('/api/admin/products/edit', formData);
+    
+    setVersions(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = {
-      description,
-      image,
-      versions,
-      role,
-    };
-    console.log(formData);
+
+    const formData = new FormData();
+    formData.append('productId', product._id);
+    formData.append('description', description);
+    formData.append('roleId', role);
+    if (image) formData.append('image', image);
+
+    await handleRequest('/api/admin/products/edit', formData);
     onClose();
   };
 
   return (
     <div className="modal">
       <div className="modal-content">
-        <span className="close-button" onClick={onClose}>
-          &times;
-        </span>
+        <span className="close-button" onClick={onClose}>&times;</span>
         <h2>Edit Product</h2>
         <form onSubmit={handleSubmit}>
           <label htmlFor="description">Description:</label>
@@ -50,25 +88,16 @@ const EditProductModal = ({ product, onClose }) => {
           />
 
           <label htmlFor="image">Image:</label>
-                    <input ref={imageInputRef} id="image" type="file" onChange={(e) => setImage(e.target.files[0])} accept="image/png" required />
-          <button type="button" className="upload-button" onClick={() => imageInputRef.current.click()}>
-            Upload Image
-          </button>
+          <input ref={imageInputRef} type="file" accept="image/png" onChange={(e) => setImage(e.target.files[0])} />
+          <button type="button" onClick={() => imageInputRef.current.click()}>Upload Image</button>
           {image && <p>Selected: {image.name}</p>}
-          
 
           <label>Versions:</label>
           <ul>
             {versions.map((version, index) => (
               <li key={index} className="version-item">
-                <span>{version}</span>
-                <button
-                  type="button"
-                  className="delete-version-btn"
-                  onClick={() => handleRemoveVersion(index)}
-                >
-                  Remove
-                </button>
+                <span>{version.value}</span>
+                <button type="button" onClick={() => handleRemoveVersion(index)}>Remove</button>
               </li>
             ))}
           </ul>
@@ -80,29 +109,18 @@ const EditProductModal = ({ product, onClose }) => {
               placeholder="New version"
               onChange={(e) => setNewVersion(e.target.value)}
             />
-          <input ref={fileInputRef} id="file" type="file" onChange={(e) => setFile(e.target.files[0])} required />
-          <button type="button" className="upload-button" onClick={() => fileInputRef.current.click()}>
-            Upload file
-          </button>
-            <button type="button" onClick={handleAddVersion}>
-              Add Version
-            </button>
+            <input ref={fileInputRef} type="file" onChange={(e) => setFile(e.target.files[0])} />
+            <button type="button" onClick={() => fileInputRef.current.click()}>Upload File</button>
+            <button type="button" onClick={handleAddVersion}>Add Version</button>
           </div>
 
           <label htmlFor="role">Discord Role:</label>
-          <select
-            id="role"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            required
-          >
+          <select id="role" value={role} onChange={(e) => setRole(e.target.value)} required>
             <option value="Admin">Admin</option>
             <option value="User">User</option>
           </select>
 
-          <button type="submit" className="submit-button">
-            Save Changes
-          </button>
+          <button type="submit">Save Changes</button>
         </form>
       </div>
     </div>
